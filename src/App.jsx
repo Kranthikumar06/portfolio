@@ -7,9 +7,9 @@ import React from 'react';
 const PROFILE = {
   name: 'Samudrala Kranthi Kumar',
   role: 'ML Engineer / AI Student',
-  tagline: 'I build systems that see, measure, and predict.',
+  tagline: 'Artificial Intelligence | Machine Learning',
   summary:
-    'Applied ML across computer vision and forecasting — models built to run in production, not just a notebook.',
+    'Aspiring Software Engineer skilled in Python, Java, and Web Development, passionate about solving real-world problems and building impactful applications.',
 };
 
 const SOCIAL = {
@@ -95,7 +95,7 @@ function Typewriter({ text, speed = 100, delay = 0 }) {
     timeout = setTimeout(type, delay);
     return () => clearTimeout(timeout);
   }, [text, speed, delay]);
-  
+
   return (
     <span>
       {text.slice(0, charsTyped)}
@@ -109,7 +109,7 @@ function Hero() {
     <header className="hero" id="top">
       <div className="hero-panel reticle">
         <span className="rt-bl" /><span className="rt-br" />
-        
+
         <div className="hero-content">
           <h1 className="hero-title">
             <Typewriter text="SAMUDRALA" speed={150} delay={400} /><br />
@@ -118,9 +118,11 @@ function Hero() {
             </span>
           </h1>
           <p className="hero-sub" style={{ fontSize: '1.2rem', color: 'var(--lime)', marginBottom: '16px' }}>
-            {PROFILE.tagline}
+            <Typewriter text={PROFILE.tagline} speed={40} delay={3900} />
           </p>
-          <p className="hero-sub">{PROFILE.summary}</p>
+          <p className="hero-sub">
+            <Typewriter text={PROFILE.summary} speed={15} delay={5800} />
+          </p>
           <div className="hero-actions">
             <button className="btn btn-fill" onClick={() => document.getElementById('projects').scrollIntoView({ behavior: 'smooth' })}>View projects →</button>
             <a className="btn btn-outline" href={SOCIAL.resume} target="_blank" rel="noopener noreferrer">Resume ↗</a>
