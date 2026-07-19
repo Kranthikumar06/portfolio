@@ -1,0 +1,235 @@
+import React from 'react';
+
+// ============================================================
+// EDIT ME — everything below is sample content. Replace freely.
+// ============================================================
+
+const PROFILE = {
+  name: 'Samudrala Kranthi Kumar',
+  role: 'ML Engineer / AI Student',
+  tagline: 'I build systems that see, measure, and predict.',
+  summary:
+    'Applied ML across computer vision and forecasting — models built to run in production, not just a notebook.',
+};
+
+const SOCIAL = {
+  email: 'you@example.com',
+  github: 'https://github.com/your-username',
+  linkedin: 'https://linkedin.com/in/your-username',
+  resume: '#', // link to a hosted PDF
+};
+
+const ABOUT = {
+  paragraph:
+    "A student of applied ML, working across detection, staging, and time-series prediction. Comfortable moving from a research notebook to something that runs like a real product — caching, retries, evaluation, all included.",
+  stats: [
+    { num: '04', label: 'projects shipped', color: 'lime' },
+    { num: '500+', label: 'problems solved', color: 'magenta' },
+    { num: '2026', label: 'placement cycle', color: 'lime' },
+  ],
+};
+
+const PROJECTS = [
+  {
+    file: 'project_alpha.py',
+    desc: 'Time-series forecasting model, deployed with a live interactive demo.',
+    score: '0.94',
+    scoreColor: 'lime',
+    repo: '#',
+    demo: '#',
+  },
+  {
+    file: 'project_beta.py',
+    desc: 'Vision model for image detection and severity staging.',
+    score: '0.89',
+    scoreColor: 'magenta',
+    repo: '#',
+    demo: null,
+  },
+  {
+    file: 'project_gamma.py',
+    desc: 'Multi-modal verification pipeline built for a hackathon, with a full eval harness.',
+    score: '0.91',
+    scoreColor: 'lime',
+    repo: '#',
+    demo: null,
+  },
+  {
+    file: 'project_delta.py',
+    desc: 'Classical ML pipeline for a structured prediction problem.',
+    score: '0.87',
+    scoreColor: 'magenta',
+    repo: '#',
+    demo: null,
+  },
+];
+
+const SKILLS = [
+  { name: 'PyTorch', color: 'lime' },
+  { name: 'YOLOv11', color: 'lime' },
+  { name: 'OpenCV', color: 'magenta' },
+  { name: 'LSTM / BiLSTM', color: 'lime' },
+  { name: 'XGBoost', color: 'magenta' },
+  { name: 'scikit-learn', color: 'magenta' },
+  { name: 'Streamlit', color: 'lime' },
+  { name: 'Pandas', color: 'lime' },
+  { name: 'Git', color: 'magenta' },
+];
+
+// ============================================================
+// Layout — you shouldn't need to touch anything below this line
+// ============================================================
+
+function Typewriter({ text, speed = 100, delay = 0 }) {
+  const [charsTyped, setCharsTyped] = React.useState(0);
+  React.useEffect(() => {
+    let timeout;
+    let i = 0;
+    const type = () => {
+      if (i < text.length) {
+        i++;
+        setCharsTyped(i);
+        timeout = setTimeout(type, speed);
+      }
+    };
+    timeout = setTimeout(type, delay);
+    return () => clearTimeout(timeout);
+  }, [text, speed, delay]);
+  
+  return (
+    <span>
+      {text.slice(0, charsTyped)}
+      <span style={{ opacity: 0 }}>{text.slice(charsTyped)}</span>
+    </span>
+  );
+}
+
+function Hero() {
+  return (
+    <header className="hero" id="top">
+      <div className="hero-panel reticle">
+        <span className="rt-bl" /><span className="rt-br" />
+        
+        <div className="hero-content">
+          <h1 className="hero-title">
+            <Typewriter text="SAMUDRALA" speed={150} delay={400} /><br />
+            <span style={{ color: 'var(--lime)' }}>
+              <Typewriter text="KRANTHI KUMAR" speed={150} delay={1900} />
+            </span>
+          </h1>
+          <p className="hero-sub" style={{ fontSize: '1.2rem', color: 'var(--lime)', marginBottom: '16px' }}>
+            {PROFILE.tagline}
+          </p>
+          <p className="hero-sub">{PROFILE.summary}</p>
+          <div className="hero-actions">
+            <button className="btn btn-fill" onClick={() => document.getElementById('projects').scrollIntoView({ behavior: 'smooth' })}>View projects →</button>
+            <a className="btn btn-outline" href={SOCIAL.resume} target="_blank" rel="noopener noreferrer">Resume ↗</a>
+          </div>
+        </div>
+
+        <div className="hero-photo-wrapper">
+          <div className="taped-frame">
+            <img className="hero-photo" src="/portfolio.jpeg" alt="Samudrala Kranthi Kumar" />
+            <div className="modern-tape tape-1"></div>
+            <div className="modern-tape tape-2"></div>
+            <div className="modern-tape tape-3"></div>
+          </div>
+        </div>
+      </div>
+    </header>
+  );
+}
+
+function About() {
+  return (
+    <section id="about">
+      <div className="section-tag">01 // about</div>
+      <h2 className="section-title">Trained on real problems.</h2>
+      <p className="about-text">{ABOUT.paragraph}</p>
+      <div className="stat-strip">
+        {ABOUT.stats.map((s) => (
+          <div className="stat-cell" key={s.label}>
+            <div className={`stat-num ${s.color}`}>{s.num}</div>
+            <div className="stat-label">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function Projects() {
+  return (
+    <section id="projects">
+      <div className="section-tag">02 // projects</div>
+      <h2 className="section-title">Detections.</h2>
+      {PROJECTS.map((p) => (
+        <div className="project-row" key={p.file} style={{ flexDirection: 'column', alignItems: 'stretch' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 16, flexWrap: 'wrap' }}>
+            <div>
+              <div className="project-name">{p.file}</div>
+              <div className="project-desc">{p.desc}</div>
+            </div>
+            <span className={`project-score score-${p.scoreColor}`}>{p.score}</span>
+          </div>
+          <div className="project-links">
+            <a href={p.repo} target="_blank" rel="noopener noreferrer">repo ↗</a>
+            {p.demo && <a href={p.demo} target="_blank" rel="noopener noreferrer">demo ↗</a>}
+          </div>
+        </div>
+      ))}
+    </section>
+  );
+}
+
+function Skills() {
+  return (
+    <section id="skills">
+      <div className="section-tag">03 // skills</div>
+      <h2 className="section-title">Stack.</h2>
+      <div className="skill-chips">
+        {SKILLS.map((s) => (
+          <span className={`chip chip-${s.color}`} key={s.name}>{s.name}</span>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function Contact() {
+  return (
+    <section id="contact">
+      <div className="section-tag">04 // contact</div>
+      <h2 className="contact-title">Let's talk.</h2>
+      <div className="contact-actions">
+        <a className="btn btn-fill" href={`mailto:${SOCIAL.email}`}>Email</a>
+        <a className="btn btn-outline" href={SOCIAL.github} target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a className="btn btn-outline" href={SOCIAL.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      </div>
+    </section>
+  );
+}
+
+function Footer() {
+  return (
+    <footer>
+      <span>© {new Date().getFullYear()} {PROFILE.name}</span>
+      <span>built with React</span>
+    </footer>
+  );
+}
+
+export default function App() {
+  return (
+    <>
+      <Hero />
+      <div className="app">
+        <About />
+        <Projects />
+        <Skills />
+        <Contact />
+        <Footer />
+      </div>
+    </>
+  );
+}
