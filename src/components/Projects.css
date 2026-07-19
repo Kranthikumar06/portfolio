@@ -1,0 +1,115 @@
+/* ---------- Projects ---------- */
+.projects-section {
+  margin-bottom: 0px;
+}
+
+.projects-title-custom {
+  display: inline-block;
+  background: var(--lime);
+  color: var(--bg);
+  padding: 8px 24px 8px 16px;
+  clip-path: polygon(0 0, 100% 0, calc(100% - 15px) 100%, 0 100%);
+  margin-bottom: 40px;
+  border-left: 6px solid var(--text);
+  
+  /* Animation starting state */
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 1.2s ease, transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition-delay: 0.6s; /* Wait for the horizontal line to expand */
+}
+
+section.is-visible .projects-title-custom {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.project-card {
+  background: var(--bg-raised);
+  border: 1px solid var(--border-bright);
+  border-radius: 8px;
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+  
+  /* Initial hidden state for reveal animation */
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.project-card:hover {
+  border-color: var(--lime-dim);
+  background: #ffffff;
+}
+
+.project-card:hover .project-title,
+.project-card:hover .project-desc,
+.project-card:hover .project-link {
+  color: #0b0f0d; /* var(--bg) inverted */
+}
+
+section.is-visible .project-card {
+  animation: slideUpFade 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  animation-delay: calc(0.8s + (var(--stagger-idx) * 0.15s));
+}
+
+.project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.project-title {
+  font-family: var(--mono);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.02em;
+  transition: color 0.3s ease;
+}
+
+.project-tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--lime);
+  background: rgba(186, 255, 92, 0.1);
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+.project-desc {
+  font-size: 14px;
+  color: var(--text-dimmer);
+  line-height: 1.5;
+  margin-bottom: 32px;
+  flex: 1;
+  transition: color 0.3s ease;
+}
+
+.project-links {
+  display: flex;
+  gap: 16px;
+}
+
+.project-link {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text-dim);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 0.3s ease;
+}
+
+.project-link:hover {
+  color: var(--lime);
+}

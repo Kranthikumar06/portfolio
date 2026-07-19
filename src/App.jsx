@@ -15,8 +15,8 @@ const PROFILE = {
 
 const SOCIAL = {
   email: 'you@example.com',
-  github: 'https://github.com/your-username',
-  linkedin: 'https://linkedin.com/in/your-username',
+  github: 'https://github.com/Kranthikumar06',
+  linkedin: 'https://www.linkedin.com/in/kranthikumar06',
   resume: '#', // link to a hosted PDF
 };
 
@@ -30,40 +30,7 @@ const ABOUT = {
   ],
 };
 
-const PROJECTS = [
-  {
-    file: 'project_alpha.py',
-    desc: 'Time-series forecasting model, deployed with a live interactive demo.',
-    score: '0.94',
-    scoreColor: 'lime',
-    repo: '#',
-    demo: '#',
-  },
-  {
-    file: 'project_beta.py',
-    desc: 'Vision model for image detection and severity staging.',
-    score: '0.89',
-    scoreColor: 'magenta',
-    repo: '#',
-    demo: null,
-  },
-  {
-    file: 'project_gamma.py',
-    desc: 'Multi-modal verification pipeline built for a hackathon, with a full eval harness.',
-    score: '0.91',
-    scoreColor: 'lime',
-    repo: '#',
-    demo: null,
-  },
-  {
-    file: 'project_delta.py',
-    desc: 'Classical ML pipeline for a structured prediction problem.',
-    score: '0.87',
-    scoreColor: 'magenta',
-    repo: '#',
-    demo: null,
-  },
-];
+import Projects from './components/Projects';
 
 
 
@@ -114,10 +81,6 @@ function Hero() {
           <p className="hero-sub">
             <Typewriter text={PROFILE.summary} speed={15} delay={5800} />
           </p>
-          <div className="hero-actions">
-            <button className="btn btn-fill" onClick={() => document.getElementById('projects').scrollIntoView({ behavior: 'smooth' })}>View projects →</button>
-            <a className="btn btn-outline" href={SOCIAL.resume} target="_blank" rel="noopener noreferrer">Resume ↗</a>
-          </div>
         </div>
 
         <div className="hero-photo-wrapper">
@@ -128,33 +91,23 @@ function Hero() {
             <div className="modern-tape tape-3"></div>
           </div>
         </div>
+
+        <div className="hero-actions-container">
+          <div className="hero-actions" style={{ animation: 'fade-in-up 2s ease 8.2s both' }}>
+            <button className="btn btn-fill" onClick={() => document.getElementById('projects').scrollIntoView({ behavior: 'smooth' })}>View projects →</button>
+            <a className="btn btn-outline" href={SOCIAL.resume} target="_blank" rel="noopener noreferrer">Resume ↗</a>
+          </div>
+          
+          <div className="hero-social-links" style={{ animation: 'fade-in-up 2s ease 8.4s both' }}>
+            <a href={SOCIAL.linkedin} target="_blank" rel="noopener noreferrer" className="social-text-link">LINKEDIN ↗</a>
+            <a href={SOCIAL.github} target="_blank" rel="noopener noreferrer" className="social-text-link">GITHUB ↗</a>
+          </div>
+        </div>
       </div>
     </header>
   );
 }
-function Projects() {
-  return (
-    <section id="projects">
-      <div className="section-tag">02 // projects</div>
-      <h2 className="section-title">Detections.</h2>
-      {PROJECTS.map((p) => (
-        <div className="project-row" key={p.file} style={{ flexDirection: 'column', alignItems: 'stretch' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 16, flexWrap: 'wrap' }}>
-            <div>
-              <div className="project-name">{p.file}</div>
-              <div className="project-desc">{p.desc}</div>
-            </div>
-            <span className={`project-score score-${p.scoreColor}`}>{p.score}</span>
-          </div>
-          <div className="project-links">
-            <a href={p.repo} target="_blank" rel="noopener noreferrer">repo ↗</a>
-            {p.demo && <a href={p.demo} target="_blank" rel="noopener noreferrer">demo ↗</a>}
-          </div>
-        </div>
-      ))}
-    </section>
-  );
-}
+
 function Contact() {
   return (
     <section id="contact">
@@ -185,6 +138,8 @@ export default function App() {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('is-visible');
+          } else {
+            entry.target.classList.remove('is-visible');
           }
         });
       },
