@@ -1,4 +1,5 @@
 import React from 'react';
+import Skills from './components/Skills';
 
 // ============================================================
 // EDIT ME — everything below is sample content. Replace freely.
@@ -7,7 +8,7 @@ import React from 'react';
 const PROFILE = {
   name: 'Samudrala Kranthi Kumar',
   role: 'ML Engineer / AI Student',
-  tagline: 'Artificial Intelligence | Machine Learning',
+  tagline: 'ARTIFICIAL INTELLIGENCE | MACHINE LEARNING',
   summary:
     'Aspiring Software Engineer skilled in Python, Java, and Web Development, passionate about solving real-world problems and building impactful applications.',
 };
@@ -64,17 +65,7 @@ const PROJECTS = [
   },
 ];
 
-const SKILLS = [
-  { name: 'PyTorch', color: 'lime' },
-  { name: 'YOLOv11', color: 'lime' },
-  { name: 'OpenCV', color: 'magenta' },
-  { name: 'LSTM / BiLSTM', color: 'lime' },
-  { name: 'XGBoost', color: 'magenta' },
-  { name: 'scikit-learn', color: 'magenta' },
-  { name: 'Streamlit', color: 'lime' },
-  { name: 'Pandas', color: 'lime' },
-  { name: 'Git', color: 'magenta' },
-];
+
 
 // ============================================================
 // Layout — you shouldn't need to touch anything below this line
@@ -117,7 +108,7 @@ function Hero() {
               <Typewriter text="KRANTHI KUMAR" speed={150} delay={1900} />
             </span>
           </h1>
-          <p className="hero-sub" style={{ fontSize: '1.2rem', color: 'var(--lime)', marginBottom: '16px' }}>
+          <p className="hero-sub" style={{ fontSize: '1.2rem', color: 'var(--lime)', marginBottom: '16px', maxWidth: '100%' }}>
             <Typewriter text={PROFILE.tagline} speed={40} delay={3900} />
           </p>
           <p className="hero-sub">
@@ -141,25 +132,6 @@ function Hero() {
     </header>
   );
 }
-
-function About() {
-  return (
-    <section id="about">
-      <div className="section-tag">01 // about</div>
-      <h2 className="section-title">Trained on real problems.</h2>
-      <p className="about-text">{ABOUT.paragraph}</p>
-      <div className="stat-strip">
-        {ABOUT.stats.map((s) => (
-          <div className="stat-cell" key={s.label}>
-            <div className={`stat-num ${s.color}`}>{s.num}</div>
-            <div className="stat-label">{s.label}</div>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
 function Projects() {
   return (
     <section id="projects">
@@ -183,21 +155,6 @@ function Projects() {
     </section>
   );
 }
-
-function Skills() {
-  return (
-    <section id="skills">
-      <div className="section-tag">03 // skills</div>
-      <h2 className="section-title">Stack.</h2>
-      <div className="skill-chips">
-        {SKILLS.map((s) => (
-          <span className={`chip chip-${s.color}`} key={s.name}>{s.name}</span>
-        ))}
-      </div>
-    </section>
-  );
-}
-
 function Contact() {
   return (
     <section id="contact">
@@ -222,13 +179,30 @@ function Footer() {
 }
 
 export default function App() {
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+          }
+        });
+      },
+      { threshold: 0, rootMargin: '0px 0px -100px 0px' }
+    );
+
+    const sections = document.querySelectorAll('section');
+    sections.forEach((s) => observer.observe(s));
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <>
       <Hero />
       <div className="app">
-        <About />
-        <Projects />
         <Skills />
+        <Projects />
         <Contact />
         <Footer />
       </div>

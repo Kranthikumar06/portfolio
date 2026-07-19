@@ -1,0 +1,137 @@
+/* ---------- Skills Grid ---------- */
+.skills-section {
+  margin-bottom: 60px;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--border);
+  border-left: 1px solid var(--border);
+}
+
+.skills-title-custom {
+  display: inline-block;
+  background: var(--lime);
+  color: var(--bg);
+  padding: 8px 24px 8px 16px;
+  clip-path: polygon(0 0, 100% 0, calc(100% - 15px) 100%, 0 100%);
+  margin-bottom: 40px;
+  border-left: 6px solid var(--text);
+  
+  /* Animation starting state */
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 1.2s ease, transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition-delay: 0.6s; /* Wait for the horizontal line to expand */
+}
+
+section.is-visible .skills-title-custom {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+
+.skill-cell {
+  padding: 32px 24px;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  transition: background-color 0.3s ease;
+  
+  /* Initial hidden state for reveal animation */
+  opacity: 0;
+}
+
+@keyframes slideUpFade {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+section.is-visible .skill-cell {
+  animation: slideUpFade 1.0s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  /* Stagger based on index passed from React, starts after the heading slides in */
+  animation-delay: calc(0.8s + (var(--stagger-idx) * 0.25s));
+}
+
+.skill-cell:hover {
+  background-color: #ffffff;
+}
+
+.skill-cell:hover .skill-cell-title,
+.skill-cell:hover .skill-cell-number {
+  color: #0b0f0d; /* var(--bg) inverted */
+}
+
+.skill-cell-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+.skill-cell-title {
+  font-family: var(--display);
+  font-size: 18px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.skill-icon {
+  color: var(--magenta); /* You can change this to var(--lime) if preferred */
+  font-size: 20px;
+}
+
+.skill-cell-number {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text-dimmer);
+}
+
+.skill-chips-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.grid-chip {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-dim);
+  background: var(--bg-raised);
+  padding: 6px 12px;
+  border: 1px solid var(--border-bright);
+  border-radius: 2px;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+  cursor: default;
+}
+
+.grid-chip:hover {
+  background: var(--lime);
+  color: var(--bg);
+  border-color: var(--lime);
+}
+
+@media (max-width: 900px) {
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+}
