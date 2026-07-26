@@ -51,8 +51,42 @@ section.is-visible .projects-title-custom {
 
 .project-card:hover .project-title,
 .project-card:hover .project-desc,
+.project-card:hover .project-bullets,
+.project-card:hover .project-tech,
 .project-card:hover .project-link {
   color: #0b0f0d; /* var(--bg) inverted */
+}
+
+.project-bullets {
+  font-size: 14px;
+  color: var(--text-dimmer);
+  line-height: 1.5;
+  margin-bottom: 24px;
+  padding-left: 20px;
+  flex: 1;
+  transition: color 0.3s ease;
+}
+
+.project-bullets li {
+  margin-bottom: 8px;
+}
+
+.project-tech {
+  font-size: 12px;
+  color: var(--text-dim);
+  line-height: 1.4;
+  margin-bottom: 28px;
+  transition: color 0.3s ease;
+}
+
+.project-tech strong {
+  font-family: var(--mono);
+  color: var(--text);
+  transition: color 0.3s ease;
+}
+
+.project-card:hover .project-tech strong {
+  color: #0b0f0d;
 }
 
 section.is-visible .project-card {
@@ -113,3 +147,4 @@ section.is-visible .project-card {
 .project-link:hover {
   color: var(--lime);
 }
+
